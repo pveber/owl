@@ -36,6 +36,8 @@ Type of the ndarray, e.g., Bigarray.Float32, Bigarray.Complex64, and etc.
  *)
 
 
+
+
 (** {6 Create Ndarrays}  *)
 
 val empty : ('a, 'b) kind -> int array -> ('a, 'b) t
@@ -2770,6 +2772,8 @@ val copy_col_to : ('a, 'b) t -> ('a, 'b) t -> int -> unit
 
 val dot : ('a, 'b) t -> ('a, 'b) t -> ('a, 'b) t
 (** Refer to :doc:`owl_dense_matrix_generic` *)
+
+val partial_dot : ('a, 'b) t -> ('a, 'b) t -> ('a, 'b) t
 
 val diag : ?k:int -> ('a, 'b) t -> ('a, 'b) t
 (** Refer to :doc:`owl_dense_matrix_generic` *)

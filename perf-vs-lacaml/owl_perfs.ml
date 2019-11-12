@@ -24,7 +24,10 @@ let mat_vec_mul n =
   let v' = Owl.Mat.init_2d n 1 (fun i _ -> float i) in
   let lacaml = Bench.Test.create ~name:(sprintf "lacaml-mat-vec-mul-%d" n) (fun () -> Lacaml.D.gemv c v) in
   let owl = Bench.Test.create ~name:(sprintf "owl-mat-vec-mul-%d" n) (fun () -> Owl.Mat.dot c' v') in
-  Bench.make_command [lacaml ; owl]
+  let owl_partial =
+    Bench.Test.create ~name:(sprintf "owl-partial-mat-vec-mul-%d" n) (fun () -> Owl_dense_ndarray_generic.partial_dot c' v')
+  in
+  Bench.make_command [lacaml ; owl ; owl_partial]
 
 let vec_init n =
   let k = n / 2 in

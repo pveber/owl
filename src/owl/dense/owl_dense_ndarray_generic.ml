@@ -8097,6 +8097,21 @@ let copy_col_to v x i =
 
 (* NOTE: same implementation code as that in Owl_linalg_generic *)
 
+let partial_dot x1 x2 =
+  let m, k = _matrix_shape x1 in
+  let l, n = _matrix_shape x2 in
+  let exn = Owl_exception.LINALG_MATRIX_DOT_SHAPE (m, k, l, n) in
+  Owl_exception.check (k = l) exn;
+
+  let _kind = kind x1 in
+  (* let alpha = Owl_const.one _kind in
+   * let beta = Owl_const.zero _kind in *)
+  let x3 = empty _kind [|m; n|] in
+  let a = flatten x1 |> Bigarray.array1_of_genarray in
+  let b = flatten x2 |> Bigarray.array1_of_genarray in
+  let c = flatten x3 |> Bigarray.array1_of_genarray in
+  ignore (a,b,c) ; x3
+
 let dot x1 x2 =
   let m, k = _matrix_shape x1 in
   let l, n = _matrix_shape x2 in
